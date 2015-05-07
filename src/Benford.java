@@ -51,7 +51,7 @@ public class Benford {
 		}
 		for(int count:benfordList){
 			percents[i] = (count/total)*100;
-			System.out.printf("%.1f\n",percents[i]);
+			System.out.printf("%.1f percent\n",percents[i]);
 			i++;
 		}
 		
