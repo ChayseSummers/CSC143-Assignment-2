@@ -1,6 +1,13 @@
 import java.util.*;
 import java.io.*;
 
+/**
+ * This class
+ * @author Chayse Summers
+ * @class CSC143 - Gandham
+ * @date 5/8/15
+ *
+ */
 public class Benford {
 	private static List<Integer> benfordList;
 	
@@ -63,6 +70,11 @@ public class Benford {
 
 	public static void setBenfordList(List<Integer> benfordList) {
 		Benford.benfordList = benfordList;
+	}
+	
+	public double[] getBenfordFrequencies(){
+		double[] bFreq = {30.1, 17.6, 12.5, 9.7, 7.9, 6.7, 5.8, 5.1, 4.6};
+		return(bFreq);
 	}
 	
 
