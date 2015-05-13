@@ -9,15 +9,16 @@ import java.io.*;
  *
  */
 public class Benford {
-	private static List<Integer> benfordList;
+	private static List<Double> benfordList;
 	
 	public Benford(){
-		benfordList = new ArrayList<Integer>();
+		benfordList = new ArrayList<Double>();
 	}
 	
 	public void readCounts(String inputFile){
 		String x;
 		char y;
+		List<Integer> temp = new ArrayList<Integer>();
 		try {
 			Scanner fileScanner = new Scanner(new File (inputFile));
 			System.out.print("Loading counts... ");
@@ -25,7 +26,7 @@ public class Benford {
 				x = fileScanner.next();
 				y = x.charAt(0);
 				if(y>48 && y<=57){
-					benfordList.add((int)y);
+					temp.add((int)y);
 				}
 				else{
 					
@@ -37,38 +38,30 @@ public class Benford {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found, please check pathway and try again.");
 		}
+		
 		int[] counts = new int[9];
-		System.out.println(benfordList.size());
-		for(int number:benfordList){
+		for(int number:temp){
 			counts[number-49] = counts[number-49]+1;
 		}
-		benfordList.clear();
-		for(int number:counts){
-			benfordList.add(number);
-		}
-		benfordPercents();
-		}
+		benfordPercents(counts);
+	}
 	
-	public void benfordPercents(){
-		double[] percents = new double[9];
+	public void benfordPercents(int[] counts){
 		double total = 0;
-		int i = 0;
-		for(int count:benfordList){
+		for(int count:counts){
 			total = total + count;
 		}
-		for(int count:benfordList){
-			percents[i] = (count/total)*100;
-			System.out.printf("%.1f percent\n",percents[i]);
-			i++;
+		for(int count:counts){
+			benfordList.add((count/total)*100);
 		}
 		
 	}
 
-	public static List<Integer> getBenfordList() {
+	public List<Double> getBenfordList() {
 		return benfordList;
 	}
 
-	public static void setBenfordList(List<Integer> benfordList) {
+	public static void setBenfordList(List<Double> benfordList) {
 		Benford.benfordList = benfordList;
 	}
 	
