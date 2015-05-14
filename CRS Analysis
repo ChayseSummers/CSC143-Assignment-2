@@ -1,0 +1,10 @@
+Data Analysis compared to Benford Frequencies
+
+	When comparing varying data sets to the Benford expected frequencies, we see that real world data doesn't correlate well with 
+the Benford expectations. While benford is a neat and clean approximation of what you could expect from a theoretical point of view,
+world data proves to be as different as the data sets themselves. Some numbers will match up decently, however most are completely off
+from Benford. When comparing real world random numbers from Wine recognition data on the UCI Machine Learning Repository we see that the
+number 1 shows up 43.3% of the time where as Benford expects 36%, this is probably due to the numbers being categorized by 1,2,3 and the
+alchohol content starting with 1. We see that real life is much different from Benford due to classifications we as humans use.
+
+Chayse Summers

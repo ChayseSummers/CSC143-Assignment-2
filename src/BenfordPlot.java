@@ -10,22 +10,18 @@ public class BenfordPlot {
 	private static List<Double> benfordFrequencies = new ArrayList<Double>();//{30.1, 17.6, 12.5, 9.7, 7.9, 6.7, 5.8, 5.1, 4.6};
 	private static int x = 10;
 	private static int y = 0;
+	private static String title;
 
 	public static void main(String[] args) {
 		Scanner console = new Scanner(System.in);
-		System.out.println("Welcome, this program can plot bar graphs for the percentages of populations in a text file.");
-		System.out.println("Text file should be formatted as follows per line...");
-		System.out.println("Example of 1st line: [Country Name] [Population]");
 		Benford x = new Benford();
-		for(double number: x.getBenfordFrequencies()){
-			benfordFrequencies.add(number);
-		}
-		System.out.print("Please enter the file pathway: ");//E:/CSC142_143/DataFiles/popData.txt
-		x.readCounts(console.next());
+		benfordFrequencies = x.getBenfordFrequencies();
+		String[] input = x.introduction(console);
+		x.readCounts(input[1]);
 		DrawingPanel canvas = new DrawingPanel(cWidth,cHeigth);
 		canvas.setBackground(Color.black);
 		Graphics2D pen = canvas.getGraphics();
-		plotData(x.getBenfordList(), pen, "Population of Countries");
+		plotData(x.getBenfordList(), pen, input[0]);
 		canvas = new DrawingPanel(cWidth,cHeigth);
 		pen = canvas.getGraphics();
 		canvas.setBackground(Color.black);
@@ -33,6 +29,14 @@ public class BenfordPlot {
 
 	}
 
+	/**
+	 * This method takes in the list of processed percentages and plots in a window them against the expected
+	 * Benford Frequencies.
+	 * 
+	 * @param list contains data to be plotted.
+	 * @param pen
+	 * @param title Title for the plot, i.e. type of data being plotted.
+	 */
 	private static void plotData(List<Double> list, Graphics2D pen, String title) {
 		pen.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
 		int i = 0;
@@ -49,7 +53,7 @@ public class BenfordPlot {
 			number = (double)Math.round(number*10)/10;
 			pen.setColor(Color.RED);
 			pen.drawString(title, cWidth/3, 20);
-			pen.drawString(String.valueOf(number), bar/2, y+15);
+			pen.drawString(String.valueOf(number)+"%", bar/2, y+15);
 			pen.drawString("^",(int)(cWidth*(benfordFrequencies.get(j)/35)), y+15);
 			j++;
 		}
